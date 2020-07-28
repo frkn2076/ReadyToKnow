@@ -9,7 +9,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      debugShowCheckedModeBanner : false,
+      debugShowCheckedModeBanner: false,
       title: 'Flutter Demo',
       theme: ThemeData(
         // This is the theme of your application.
@@ -99,10 +99,41 @@ class _MyHomePageState extends State<MyHomePage> {
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
             Image.asset(
-                    "assets/images/closeEyes.gif",
-                    height: 125.0,
-                    width: 125.0,
-                  ),
+              "assets/images/closeEyes.gif",
+              height: 125.0,
+              width: 125.0,
+            ),
+            TextField(
+              maxLength: 20,  //textfield'ın sağ altına 0/20 yazıp karakter sınırı koyuyor
+              decoration: InputDecoration(
+                border: InputBorder.none,
+                hintText: 'User',
+                enabledBorder: UnderlineInputBorder(
+                  borderSide: BorderSide(color: Colors.grey),
+                  //  when the TextFormField in unfocused
+                ),
+                focusedBorder: UnderlineInputBorder(
+                  borderSide: BorderSide(color: Colors.blue),
+                  //  when the TextFormField in focused
+                ),
+              ),
+              textAlign: TextAlign.left,
+            ),
+            TextField(
+              decoration: InputDecoration(
+                border: InputBorder.none,
+                hintText: 'Password',
+                enabledBorder: UnderlineInputBorder(
+                  borderSide: BorderSide(color: Colors.grey),
+                  //  when the TextFormField in unfocused
+                ),
+                focusedBorder: UnderlineInputBorder(
+                  borderSide: BorderSide(color: Colors.blue),
+                  //  when the TextFormField in focused
+                ),
+              ),
+              textAlign: TextAlign.left,
+            ),
             Text(
               '$_counter',
               style: Theme.of(context).textTheme.headline4,
