@@ -1,9 +1,10 @@
 import 'package:ReadyToKnow/Detail.dart';
 import 'package:flutter/material.dart';
 
+import 'Models/CategoryDummy.dart';
 import 'RestAPI.dart';
 
-class MyApp2 extends StatelessWidget {
+class Dashboard extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
@@ -20,20 +21,19 @@ class MyApp2 extends StatelessWidget {
         primarySwatch: Colors.blue,
         visualDensity: VisualDensity.adaptivePlatformDensity,
       ),
-      home: Dashboard(),
+      home: DashboardHomePage(),
     );
   }
 }
 
-class Dashboard extends StatefulWidget {
-  Dashboard() : super();
+class DashboardHomePage extends StatefulWidget {
+  DashboardHomePage() : super();
 
   @override
-  _DashboardState createState() => _DashboardState();
+  _DashboardHomePageState createState() => _DashboardHomePageState();
 }
 
-class _DashboardState extends State<Dashboard> {
-  final List<String> countries = ["Furkan", "Batuhan", "Rıdvan"];
+class _DashboardHomePageState extends State<DashboardHomePage> {
 
   // List<Category> futureCategories;
 
