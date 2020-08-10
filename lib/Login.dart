@@ -1,3 +1,4 @@
+import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
@@ -117,7 +118,7 @@ class _MyHomePageState extends State<MyHomePage> {
         Text(
           '- OR -',
           style: TextStyle(
-            color: Colors.white,
+            color: Colors.white38,
             fontWeight: FontWeight.w400,
           ),
         ),
@@ -127,36 +128,36 @@ class _MyHomePageState extends State<MyHomePage> {
 
   Widget buildLogin() {
     return Container(
-      padding: EdgeInsets.only(top: 25.0, left: 50.0, right: 50.0),
-      width: double.infinity,
-      child: RaisedButton(
-        elevation: 5.0,
-        onPressed: () {
-          // Navigator.of(context).pushNamed(Country.routeName,
-          //     arguments: countries[index]);
-          // Navigator.pushNamed(context, '/login', arguments: {'isSignInParam': false});
-          Navigator.pushReplacement(context,
-              MaterialPageRoute(builder: (BuildContext context) {
-            return Login(isSignInParam: !widget.isSignIn);
-          }));
-        },
-        padding: EdgeInsets.all(15.0),
-        shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(30.0),
-        ),
-        color: Colors.white,
-        child: Text(
-          widget.isSignIn ? "LOGIN" : "SIGN IN",
+        child: RichText(
+      text: TextSpan(
           style: TextStyle(
-            color: Color(0xFF527DAA),
+            color: Colors.white54,
             letterSpacing: 1.5,
-            fontSize: 18.0,
+            fontSize: 19.0,
             fontWeight: FontWeight.bold,
             fontFamily: 'OpenSans',
           ),
-        ),
-      ),
-    );
+          children: <TextSpan>[
+            TextSpan(text: 'Click here to '),
+            TextSpan(
+                text: widget.isSignIn ? "Login" : "Sign In",
+                style: TextStyle(
+                  color: Colors.white54,
+                  letterSpacing: 1.5,
+                  fontSize: 19.0,
+                  fontWeight: FontWeight.bold,
+                  fontFamily: 'OpenSans',
+                  decoration: TextDecoration.underline,
+                ),
+                recognizer: TapGestureRecognizer()
+                  ..onTap = () {
+                    Navigator.pushReplacement(context,
+                        MaterialPageRoute(builder: (BuildContext context) {
+                      return Login(isSignInParam: !widget.isSignIn);
+                    }));
+                  }),
+          ]),
+    ));
   }
 
   Widget buildEnterButton() {
@@ -166,13 +167,11 @@ class _MyHomePageState extends State<MyHomePage> {
       child: RaisedButton(
           elevation: 5.0,
           onPressed: () {
-            // Navigator.of(context).pushNamed(Country.routeName,
-            //     arguments: countries[index]);
-            // Navigator.pushNamed(context, '/login', arguments: {'isSignInParam': false});
-            Navigator.pushReplacement(context,
-                MaterialPageRoute(builder: (BuildContext context) {
-              return Login(isSignInParam: !widget.isSignIn);
-            }));
+            // Navigator.pushReplacement(context,
+            //     MaterialPageRoute(builder: (BuildContext context) {
+            //   return Login(isSignInParam: !widget.isSignIn);
+            // }));
+            print("Heyyy");
           },
           padding: EdgeInsets.all(15.0),
           shape: RoundedRectangleBorder(
@@ -243,6 +242,9 @@ class _MyHomePageState extends State<MyHomePage> {
                         height: 70.0,
                       ),
                       buildORText(),
+                      SizedBox(
+                        height: 10.0,
+                      ),
                       buildLogin(),
                     ],
                   ),
