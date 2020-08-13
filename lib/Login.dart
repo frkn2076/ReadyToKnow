@@ -1,3 +1,4 @@
+import 'package:ReadyToKnow/Dashboard.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -12,12 +13,12 @@ class Login extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      // routes: {
-      //   // When navigating to the "/" route, build the FirstScreen widget.
-      //   '/login': (context) => Login(isSignInParam: false),
-      //   // // When navigating to the "/second" route, build the SecondScreen widget.
-      //   // '/second': (context) => SecondScreen(),
-      // },
+      routes: {
+        // When navigating to the "/" route, build the FirstScreen widget.
+        '/dashboard': (context) => Dashboard(),
+        // // When navigating to the "/second" route, build the SecondScreen widget.
+        // '/second': (context) => SecondScreen(),
+      },
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
         primarySwatch: Colors.blue,
@@ -167,11 +168,7 @@ class _MyHomePageState extends State<MyHomePage> {
       child: RaisedButton(
           elevation: 5.0,
           onPressed: () {
-            // Navigator.pushReplacement(context,
-            //     MaterialPageRoute(builder: (BuildContext context) {
-            //   return Login(isSignInParam: !widget.isSignIn);
-            // }));
-            print("Heyyy");
+            Navigator.pushNamed(context, '/dashboard');
           },
           padding: EdgeInsets.all(15.0),
           shape: RoundedRectangleBorder(
