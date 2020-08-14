@@ -1,18 +1,19 @@
 import 'package:ReadyToKnow/Detail.dart';
 import 'package:ReadyToKnow/Login.dart';
 import 'package:flutter/material.dart';
+// import 'package:flutter_html/flutter_html.dart';
+import 'package:loader_search_bar/loader_search_bar.dart';
 
 import 'Models/CategoryDummy.dart';
 import 'RestAPI.dart';
 
 class Dashboard extends StatelessWidget {
-
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       routes: {
-        '/detail': (context) => Detail(),
+        '/detail': (context) => Detail(ModalRoute.of(context).settings.arguments),
         '/login': (context) => Login()
       },
       theme: ThemeData(
@@ -32,104 +33,34 @@ class DashboardHomePage extends StatefulWidget {
 }
 
 class _DashboardHomePageState extends State<DashboardHomePage> {
-  // List<Category> futureCategories;
-
-  // @override
-  // void initState() {
-  //   super.initState();
-  //   getCategories();
-  // }
-
-  // @override
-  // dispose() {
-  //   super.dispose();
-  // }
-
-  // getCategories() async {
-  //   API.fetchCategories().then((value) {
-  //     setState(() {
-  //       futureCategories = value;
-  //     });
-  //   });
-  // }
-
-
-  static Widget buildAppBar(BuildContext context, bool isSearchAppBar){
-    return AppBar(
-          elevation: 150.0,
-          leading: IconButton(
-            icon: Icon(Icons.arrow_back_ios, color: Colors.black),
-            onPressed: () => Navigator.pushNamed(context, '/dashboard'),
-          ),
-          backgroundColor: Color(0xFF73AEF5),
-          title: Text("Search..."),
-          actions: <Widget>[
-            IconButton(
-              icon: Icon(Icons.search),
-              color: Colors.blue,
-              onPressed: () {
-                setState(() {
-                  isSearchAppBar = !isSearchAppBar;
-                });
-              },
-            )]
-            ..addAll(
-              isSearchAppBar ? 
-             [
-               TextField(
-                 style: new TextStyle(
-                    color: Colors.white,
-
-                  ),
-                  decoration: new InputDecoration(
-                      prefixIcon: new Icon(Icons.search, color: Colors.white),
-                      hintText: "Search...",
-                      hintStyle: new TextStyle(color: Colors.white)
-                  ),
-               )
-             ]
-              :
-            [
-            IconButton(
-              icon: Icon(Icons.more_vert),
-              // onPressed: () => Navigator.pushNamed(context, '/detail'),
-            ),
-            ]
-            
-            )
-
-
-            // true
-            //     ? IconButton(
-            //         icon: Icon(Icons.cancel),
-            //         onPressed: () {
-            //           setState(() {
-            //             // this.isSearching = false;
-            //             // filteredCountries = countries;
-            //           });
-            //         },
-            //       )
-            //     : IconButton(
-            //         icon: Icon(Icons.search),
-            //         onPressed: () {
-            //           setState(() {
-            //             // this.isSearching = true;
-            //           });
-            //         },
-            //       )
-        );
-  }
-
-  Widget buildSearchAppBar(BuildContext context){
-
-  }
+  bool isSearchAppBar = true;
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar: buildAppBar(context, true),
+        appBar: SearchBar(
+            searchHint: "Search...",
+            defaultBar: AppBar(
+                elevation: 150.0,
+                leading: IconButton(
+                  icon: Icon(Icons.arrow_back_ios, color: Colors.black),
+                  onPressed: () => Navigator.pushNamed(context, '/login', arguments: 3),
+                ),
+                backgroundColor: Color(0xFF73AEF5),
+                // title: Text("Search..."),
+                actions: [
+                  IconButton(
+                    icon: Icon(Icons.more_vert),
+                    color: Colors.white,
+                    onPressed: () {
+                      setState() {
+
+                      }
+                    },
+                  ),
+                ])),
         body: Container(
-            child: FutureBuilder<List<Category>>(
+            child: FutureBuilder<List<MyCategory>>(
           future: API.fetchCategories(),
           builder: (context, projectSnap) {
             return projectSnap.connectionState == ConnectionState.done
@@ -138,9 +69,7 @@ class _DashboardHomePageState extends State<DashboardHomePage> {
                     itemBuilder: (BuildContext context, int index) {
                       return GestureDetector(
                         onTap: () {
-                          // Navigator.of(context).pushNamed(Country.routeName,
-                          //     arguments: countries[index]);
-                          Navigator.pushNamed(context, '/detail');
+                          Navigator.pushNamed(context, '/detail', arguments: 3);
                         },
                         child: Card(
                           elevation: 10,
@@ -151,6 +80,7 @@ class _DashboardHomePageState extends State<DashboardHomePage> {
                               projectSnap.data[index].name,
                               style: TextStyle(fontSize: 18),
                             ),
+                            // Html(data:"<p>Hello <b>Flutter</b><p>"),
                           ),
                         ),
                       );
@@ -159,7 +89,6 @@ class _DashboardHomePageState extends State<DashboardHomePage> {
                     child: CircularProgressIndicator(),
                   );
           },
-        ))
-        );
+        )));
   }
 }

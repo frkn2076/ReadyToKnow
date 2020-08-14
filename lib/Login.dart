@@ -1,8 +1,11 @@
-import 'package:ReadyToKnow/Dashboard.dart';
+import 'package:ReadyToKnow/Router.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
+import 'Dashboard.dart';
+import 'Detail.dart';
+import 'NotFoundPage.dart';
 import 'Utilities.dart';
 
 class Login extends StatelessWidget {
@@ -14,11 +17,13 @@ class Login extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       routes: {
-        // When navigating to the "/" route, build the FirstScreen widget.
         '/dashboard': (context) => Dashboard(),
-        // // When navigating to the "/second" route, build the SecondScreen widget.
-        // '/second': (context) => SecondScreen(),
       },
+      // initialRoute: '/',
+      // onGenerateRoute: RouteGenerator.generateRoute,
+      // onUnknownRoute: (RouteSettings setting) {
+      //   return new MaterialPageRoute(builder: (_) => NotFoundPage());
+      // },
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
         primarySwatch: Colors.blue,
